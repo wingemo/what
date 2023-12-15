@@ -2,6 +2,5 @@ package com.example.demo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-interface EmployeeRepository extends JpaRepository<Microservice, Long> {
-
+public interface MicroserviceRepository extends JpaRepository<Microservice, Long> {
 }
