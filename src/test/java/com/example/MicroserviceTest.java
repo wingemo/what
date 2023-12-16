@@ -6,18 +6,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import static org.junit.jupiter.api.Assertions.assertTrue; 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class MicroserviceMetadataTest {
+public class MicroserviceTest {
 
-    private MicroserviceMetadata microserviceMetadata;
+    private Microservice microservice;
 
     @BeforeEach
     public void setUp() {
-        // Create a MicroserviceMetadata object to test
-        microserviceMetadata = new MicroserviceMetadata(
+        microservice = new Microservice(
             "MyService",
             "1.0",
             "Description of the service",
@@ -33,42 +32,48 @@ public class MicroserviceMetadataTest {
 
     @Test
     public void testGetServiceName() {
-        assertEquals("MyService", microserviceMetadata.getServiceName());
+        assertEquals("MyService", microservice.getServiceName());
     }
 
     @Test
     public void testGetVersion() {
-        assertEquals("1.0", microserviceMetadata.getVersion());
+        assertEquals("1.0", microservice.getVersion());
     }
 
     @Test
     public void testGetDescription() {
-        assertEquals("Description of the service", microserviceMetadata.getDescription());
+        assertEquals("Description of the service", microservice.getDescription());
     }
 
     @Test
     public void testGetOwner() {
-        assertEquals("Owner", microserviceMetadata.getOwner());
+        assertEquals("Owner", microservice.getOwner());
     }
 
     @Test
     public void testGetStatus() {
-        assertEquals("Active", microserviceMetadata.getStatus());
+        assertEquals("Active", microservice.getStatus());
     }
 
     @Test
     public void testGetDependencies() {
-        List<String> dependencies = microserviceMetadata.getDependencies();
-        assertEquals(0, dependencies.size());
+        List<String> dependencies = microservice.getDependencies();
+        dependencies.add("DatabaseService");
+        dependencies.add("AuthService");
+        dependencies.add("LoggingService");
+        assertEquals(3, dependencies.size());
+        assertTrue(dependencies.contains("DatabaseService"));
+        assertTrue(dependencies.contains("AuthService"));
+        assertTrue(dependencies.contains("LoggingService"));
     }
 
     @Test
     public void testGetLatestCommit() {
-        assertEquals("Latest commit hash", microserviceMetadata.getLatestCommit());
+        assertEquals("Latest commit hash", microservice.getLatestCommit());
     }
 
     @Test
     public void testGetGitRepoLink() {
-        assertEquals("https://github.com/your-username/your-git-repo", microserviceMetadata.getGitRepoLink());
+        assertEquals("https://github.com/your-username/your-git-repo", microservice.getGitRepoLink());
     }
 }

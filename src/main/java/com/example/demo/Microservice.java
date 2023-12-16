@@ -1,7 +1,9 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+package com.example.demo;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -133,7 +135,7 @@ public class Microservice{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MicroserviceMetadata that = (MicroserviceMetadata) o;
+        Microservice that = (Microservice) o;
         return Objects.equals(id, that.id);
     }
 
@@ -144,7 +146,7 @@ public class Microservice{
 
     @Override
     public String toString() {
-        return "MicroserviceMetadata{" +
+        return "Microservice{" +
                 "id=" + id +
                 ", serviceName='" + serviceName + '\'' +
                 ", version='" + version + '\'' +

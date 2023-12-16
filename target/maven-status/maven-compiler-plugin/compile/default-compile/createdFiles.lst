@@ -1,0 +1,7 @@
+com\example\demo\DemoApplication.class
+com\example\demo\MicroserviceNotFoundException.class
+com\example\demo\MicroserviceController.class
+com\example\demo\Microservice.class
+com\example\demo\MicroserviceNotFoundAdvice.class
+com\example\demo\MicroserviceRepository.class
+com\example\demo\LoadDatabase.class
