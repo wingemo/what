@@ -1,0 +1,86 @@
+@startuml
+hide <<Path>> circle
+hide <<Response>> circle
+hide <<Parameter>> circle
+hide empty methods
+hide empty fields
+set namespaceSeparator none
+
+class "Microservice" {
+  {field} id : integer {O}
+  {field} serviceName : string
+  {field} version : string
+  {field} description : string
+  {field} owner : string
+  {field} status : string
+  {field} dependencies : string[]
+  {field} createdAt : timestamp
+  {field} updatedAt : timestamp
+  {field} latestCommit : string
+  {field} gitRepoLink : string
+}
+
+class "GET /microservices" <<Path>> {
+}
+
+class "GET /microservices 200" <<Response>> {
+}
+
+class "POST /microservices" <<Path>> {
+}
+
+class "GET /microservices/{id}" <<Path>> {
+}
+
+class "GET /microservices/{id} 404" <<Response>> {
+}
+
+class "PUT /microservices/{id}" <<Path>> {
+}
+
+class "PUT /microservices/{id} 404" <<Response>> {
+}
+
+class "DELETE /microservices/{id}" <<Path>> {
+}
+
+class "DELETE /microservices/{id} 204" <<Response>> {
+}
+
+class "DELETE /microservices/{id} 404" <<Response>> {
+}
+
+class "GET /microservices/search" <<Path>> {
+  {field} serviceName : string {O}
+}
+
+class "GET /microservices/search 200" <<Response>> {
+}
+
+"GET /microservices 200" --> "*" "Microservice"
+
+"GET /microservices" ..> "1" "GET /microservices 200"  :  "200"
+
+"POST /microservices" ..> "1" "Microservice"  :  "201"
+
+"POST /microservices" --> "1" "Microservice"
+
+"GET /microservices/{id}" ..> "1" "Microservice"  :  "200"
+
+"GET /microservices/{id}" ..> "1" "GET /microservices/{id} 404"  :  "404"
+
+"PUT /microservices/{id}" ..> "1" "Microservice"  :  "200"
+
+"PUT /microservices/{id}" ..> "1" "PUT /microservices/{id} 404"  :  "404"
+
+"PUT /microservices/{id}" --> "1" "Microservice"
+
+"DELETE /microservices/{id}" ..> "1" "DELETE /microservices/{id} 204"  :  "204"
+
+"DELETE /microservices/{id}" ..> "1" "DELETE /microservices/{id} 404"  :  "404"
+
+"GET /microservices/search 200" --> "*" "Microservice"
+
+"GET /microservices/search" ..> "1" "GET /microservices/search 200"  :  "200"
+
+@enduml
